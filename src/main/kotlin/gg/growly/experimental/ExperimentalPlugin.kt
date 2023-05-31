@@ -1,8 +1,11 @@
 package gg.growly.experimental
 
 import com.github.shynixn.mccoroutine.bukkit.SuspendingJavaPlugin
+import com.github.shynixn.mccoroutine.bukkit.setSuspendingExecutor
+import gg.growly.experimental.command.Top10BalancesCommand
 import gg.growly.experimental.model.PlayerProfileService
 import org.bukkit.plugin.java.JavaPlugin
+import org.bukkit.plugin.java.annotation.command.Command
 import org.bukkit.plugin.java.annotation.plugin.Plugin
 import org.bukkit.plugin.java.annotation.plugin.author.Author
 import org.litote.kmongo.serialization.SerializationClassMappingTypeService
@@ -18,6 +21,9 @@ import java.io.File
     version = "1.0.0"
 )
 @Author("GrowlyX")
+@Command(
+    name = "top10balances"
+)
 class ExperimentalPlugin : SuspendingJavaPlugin()
 {
     var config = PluginConfig()
@@ -47,6 +53,11 @@ class ExperimentalPlugin : SuspendingJavaPlugin()
             .configure(plugin = this)
         PlayerProfileService
             .configure(plugin = this)
+
+        getCommand("top10balances")!!
+            .setSuspendingExecutor(
+                Top10BalancesCommand(plugin = this)
+            )
     }
 
     override fun onDisable()

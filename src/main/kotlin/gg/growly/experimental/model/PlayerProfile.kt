@@ -11,6 +11,7 @@ import java.util.*
 @Serializable
 data class PlayerProfile(
     val uniqueId: @Contextual UUID,
+    var username: String
 )
 {
     var balance: Int = 0
