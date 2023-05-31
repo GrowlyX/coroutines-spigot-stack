@@ -1,6 +1,7 @@
 package gg.growly.experimental.model
 
 import kotlinx.serialization.Contextual
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.*
 
@@ -10,6 +11,7 @@ import java.util.*
  */
 @Serializable
 data class PlayerProfile(
+    @SerialName("_id")
     val uniqueId: @Contextual UUID,
     var username: String
 )

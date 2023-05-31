@@ -8,6 +8,7 @@ import gg.growly.experimental.PluginDatabaseService
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
+import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent
@@ -83,7 +84,14 @@ object PlayerProfileService : Listener
     @EventHandler
     suspend fun onPlayerLogin(event: PlayerLoginEvent)
     {
-        val profile = event.player.profileNonNull()
+        val profile = event.player.profileNullable()
+            ?: return run {
+                event.disallow(
+                    PlayerLoginEvent.Result.KICK_OTHER,
+                    "${ChatColor.RED}Your profile failed to load!"
+                )
+            }
+
         val previousUsername = profile.username
         profile.username = event.player.name
 

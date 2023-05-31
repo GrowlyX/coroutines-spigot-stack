@@ -41,9 +41,17 @@ class ExperimentalPlugin : SuspendingJavaPlugin()
             )
             .build()
 
-        loader
-            .load()
+        val node = loader.load()
+
+        node
             .get(PluginConfig::class.java)
+            .apply {
+                if (this == null)
+                {
+                    node.set(PluginConfig::class.java, config)
+                    loader.save(node)
+                }
+            }
             ?.apply {
                 config = this
             }

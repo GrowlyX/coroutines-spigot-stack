@@ -32,7 +32,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.5.1")
 
     implementation("org.litote.kmongo:kmongo-coroutine-serialization:4.9.0")
-    implementation("org.mongodb:mongo-java-driver:3.12.13")
     implementation("org.spongepowered:configurate-yaml:4.0.0")
     implementation("org.spongepowered:configurate-yaml:4.0.0")
 
@@ -50,12 +49,6 @@ kotlin {
 
 tasks.withType<ShadowJar> {
     archiveClassifier.set("")
-    exclude(
-        "**/*.kotlin_metadata",
-        "**/*.kotlin_builtins",
-        "META-INF/"
-    )
-
     archiveFileName.set(
         "${project.name}.jar"
     )
