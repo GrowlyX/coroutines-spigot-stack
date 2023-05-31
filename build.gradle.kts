@@ -8,6 +8,7 @@ plugins {
     `maven-publish`
     kotlin("jvm") version "1.8.20"
     kotlin("kapt") version "1.8.20"
+    kotlin("plugin.serialization") version "1.8.20"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("org.jetbrains.gradle.plugin.idea-ext") version "1.1.6"
 }
@@ -28,13 +29,15 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.5.1")
 
-    implementation("org.litote.kmongo:kmongo:4.9.0")
     implementation("org.litote.kmongo:kmongo-coroutine-serialization:4.9.0")
-
     implementation("org.mongodb:mongo-java-driver:3.12.13")
-
     implementation("org.spongepowered:configurate-yaml:4.0.0")
+    implementation("org.spongepowered:configurate-yaml:4.0.0")
+
+    implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.12.1")
+    implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.12.1")
 
     compileOnly("org.spigotmc:plugin-annotations:1.2.3-SNAPSHOT")
     kapt("org.spigotmc:plugin-annotations:1.2.3-SNAPSHOT")

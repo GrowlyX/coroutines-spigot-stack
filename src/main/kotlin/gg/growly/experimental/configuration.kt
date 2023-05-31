@@ -8,5 +8,11 @@ import org.spongepowered.configurate.objectmapping.ConfigSerializable
  */
 @ConfigSerializable
 data class PluginConfig(
-    val mongoUri: String = "mongodb://127.0.0.1:27017"
+    val mongo: MongoConfig = MongoConfig()
+)
+
+@ConfigSerializable
+data class MongoConfig(
+    val uri: String = "mongodb://127.0.0.1:27017",
+    val database: String = "experimental"
 )

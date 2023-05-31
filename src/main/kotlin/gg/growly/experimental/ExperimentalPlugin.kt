@@ -1,5 +1,7 @@
 package gg.growly.experimental
 
+import com.github.shynixn.mccoroutine.bukkit.SuspendingJavaPlugin
+import gg.growly.experimental.model.PlayerProfileService
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.annotation.plugin.Plugin
 import org.bukkit.plugin.java.annotation.plugin.author.Author
@@ -16,7 +18,7 @@ import java.io.File
     version = "1.0.0"
 )
 @Author("GrowlyX")
-class ExperimentalPlugin : JavaPlugin()
+class ExperimentalPlugin : SuspendingJavaPlugin()
 {
     var config = PluginConfig()
 
@@ -40,5 +42,15 @@ class ExperimentalPlugin : JavaPlugin()
             ?.apply {
                 config = this
             }
+
+        PluginDatabaseService
+            .configure(plugin = this)
+        PlayerProfileService
+            .configure(plugin = this)
+    }
+
+    override fun onDisable()
+    {
+        PluginDatabaseService.close()
     }
 }
